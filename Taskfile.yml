@@ -1,0 +1,18 @@
+version: '3'
+
+env:
+  PROG: moneta
+  BINDIR: ./bin
+  SRCDIR: ./cmd/cli
+
+tasks:
+  default:
+    aliases:
+      - build
+    cmds:
+      - go build -o $BINDIR/$PROG $SRCDIR
+
+  clean:
+    cmds:
+      - rm -f $BINDIR/$PROG
+      - rmdir $BINDIR
