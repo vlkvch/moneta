@@ -33,7 +33,6 @@ func IsValid(currencyCode string) bool {
 	}
 
 	lastUpdated := fileStat.ModTime()
-
 	resetTime := time.Date(lastUpdated.Year(), lastUpdated.Month(), lastUpdated.Day()+1, 0, 0, 0, 0, time.Local)
 
 	return time.Now().Before(resetTime)
@@ -62,7 +61,7 @@ func Write(curr *models.Currency) error {
 
 	file := filepath.Join(CacheDir(), strings.ToLower(curr.Code)+".json")
 
-	f, err := os.OpenFile(file, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile(file, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0644)
 	if err != nil {
 		return err
 	}
