@@ -16,7 +16,10 @@ var (
 
 func init() {
 	os.MkdirAll(cache.CacheDir(), 0700)
-	flag.Usage = usage
+	flag.Usage = func() {
+		fmt.Fprintln(flag.CommandLine.Output(), "Usage: moneta [option...]\n\nOptions:")
+		flag.PrintDefaults()
+	}
 	flag.Parse()
 }
 
