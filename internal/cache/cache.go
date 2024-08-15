@@ -61,7 +61,7 @@ func Write(curr *models.Currency) error {
 
 	file := filepath.Join(CacheDir(), strings.ToLower(curr.Code)+".json")
 
-	f, err := os.OpenFile(file, os.O_CREATE|os.O_TRUNC|os.O_WRONLY, 0644)
+	f, err := os.OpenFile(file, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return err
 	}
