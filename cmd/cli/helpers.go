@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"strconv"
 	"strings"
@@ -49,4 +50,9 @@ func singleCurrency(currencyCode string, amount float64, quiet bool) (string, er
 	}
 
 	return fmt.Sprintf("%s%s BYN", startStr, strconv.FormatFloat(c.Rate*amount/float64(c.Scale), 'f', -1, 32)), nil
+}
+
+func usage() {
+	fmt.Println("Usage: moneta [option...]\n\nOptions:")
+	flag.PrintDefaults()
 }
