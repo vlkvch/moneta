@@ -8,6 +8,18 @@ Currency rates are fetched from the National Bank of the Republic of Belarus.
 
 You can get the usage using the `-h`/`--help` flag.
 
+```
+Usage: moneta [option...]
+
+Options:
+  -amount float
+      Set amount to convert.
+  -from string
+      Set currency to convert from. (default "USD")
+  -quiet
+      Display less output.
+```
+
 ## Building
 
 The simplest way to build moneta is to use either [Task](https://taskfile.dev/):

@@ -9,13 +9,14 @@ import (
 )
 
 var (
-	amount       = flag.Float64("amount", 0.0, "Amount to convert.")
+	amount       = flag.Float64("amount", 0.0, "Set amount to convert.")
 	currencyCode = flag.String("from", "USD", "Set currency to convert from.")
 	quiet        = flag.Bool("quiet", false, "Display less output.")
 )
 
 func init() {
 	os.MkdirAll(cache.CacheDir(), 0700)
+	flag.Usage = usage
 	flag.Parse()
 }
 
