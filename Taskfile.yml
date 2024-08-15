@@ -7,10 +7,20 @@ env:
 
 tasks:
   default:
-    aliases:
-      - build
+    deps: [build]
+
+  build:
+    sources:
+      - ./**/*.go
+    generates:
+      - $BINDIR/$PROG
     cmds:
       - go build -o $BINDIR/$PROG $SRCDIR
+
+  run:
+    deps: [build]
+    cmds:
+      - $BINDIR/$PROG {{.CLI_ARGS}}
 
   clean:
     cmds:
