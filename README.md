@@ -20,6 +20,8 @@ Options:
       Display less output.
 ```
 
+On the first run, data is fetched from the network and then cached on your disk. The cache is considered invalid the next day.
+
 ## Building
 
 The simplest way to build moneta is to use either [Task](https://taskfile.dev/):
