@@ -9,24 +9,17 @@ import (
 )
 
 func mainCurrencies() (string, error) {
-	var (
-		currencies = [...]string{
-			"CNY",
-			"EUR",
-			"KZT",
-			"RUB",
-			"USD",
-		}
-		b strings.Builder
-	)
+	currencies := [...]string{"CNY", "EUR", "KZT", "RUB", "USD"}
 
-	for i := range currencies {
-		c, err := fetcher.GetCurrency(currencies[i])
+	b := new(strings.Builder)
+
+	for _, v := range currencies {
+		c, err := fetcher.GetCurrency(v)
 		if err != nil {
 			return "", err
 		}
 
-		fmt.Fprintf(&b, "%-4d %s = %s\n", c.Scale, c.Code, c)
+		fmt.Fprintf(b, "%-4d %s = %s\n", c.Scale, c.Code, c)
 	}
 
 	return strings.Trim(b.String(), "\n"), nil
