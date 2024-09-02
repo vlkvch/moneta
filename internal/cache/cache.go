@@ -26,6 +26,7 @@ func IsValid(currencyCode string) bool {
 	if err != nil {
 		return false
 	}
+	defer f.Close()
 
 	fileStat, err := f.Stat()
 	if err != nil {
