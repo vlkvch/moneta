@@ -8,20 +8,20 @@ import (
 
 func GetCurrency(code string) (*models.Currency, error) {
 	if cache.IsValid(code) {
-		c, err := cache.GetCurrency(code)
+		curr, err := cache.GetCurrency(code)
 		if err != nil {
 			return nil, err
 		}
 
-		return c, nil
+		return curr, nil
 	}
 
-	c, err := nbrb.GetCurrency(code)
+	curr, err := nbrb.GetCurrency(code)
 	if err != nil {
 		return nil, err
 	}
 
-	cache.Write(c)
+	cache.Write(curr)
 
-	return c, nil
+	return curr, nil
 }
