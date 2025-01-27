@@ -7,6 +7,9 @@ all: $(PROG)
 $(PROG):
 	go build -o $(BINDIR)/$(PROG) $(SRCDIR)
 
+run: $(PROG)
+	./$(BINDIR)/$(PROG)
+
 clean:
 	rm --force $(BINDIR)/$(PROG)
 	rmdir $(BINDIR)
