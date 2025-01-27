@@ -8,7 +8,7 @@ $(PROG):
 	go build -o $(BINDIR)/$(PROG) $(SRCDIR)
 
 clean:
-	rm -f $(BINDIR)/$(PROG)
+	rm --force $(BINDIR)/$(PROG)
 	rmdir $(BINDIR)
 
 .PHONY: all clean
