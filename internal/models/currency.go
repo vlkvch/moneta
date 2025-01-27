@@ -6,9 +6,9 @@ import (
 )
 
 type Currency struct {
-	Code  string  `json:"Cur_Abbreviation"`
-	Rate  float64 `json:"Cur_OfficialRate"`
 	Scale int     `json:"Cur_Scale"`
+	Rate  float64 `json:"Cur_OfficialRate"`
+	Code  string  `json:"Cur_Abbreviation"`
 }
 
 func (c Currency) String() string {
