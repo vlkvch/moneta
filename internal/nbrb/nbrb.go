@@ -29,8 +29,7 @@ func GetCurrency(code string) (*models.Currency, error) {
 
 	curr := new(models.Currency)
 
-	err = json.Unmarshal(data, curr)
-	if err != nil {
+	if err := json.Unmarshal(data, curr); err != nil {
 		return nil, err
 	}
 

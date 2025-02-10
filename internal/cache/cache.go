@@ -49,7 +49,9 @@ func GetCurrency(code string) (*models.Currency, error) {
 
 	curr := new(models.Currency)
 
-	json.Unmarshal(contents, curr)
+	if err := json.Unmarshal(contents, curr); err != nil {
+		return nil, err
+	}
 
 	return curr, nil
 }
@@ -68,8 +70,7 @@ func Write(curr *models.Currency) error {
 	}
 	defer currencyFile.Close()
 
-	_, err = currencyFile.Write(data)
-	if err != nil {
+	if _, err := currencyFile.Write(data); err != nil {
 		return err
 	}
 
