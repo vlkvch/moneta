@@ -12,34 +12,31 @@ You can get the usage using the `-h`/`--help` flag.
 Usage: moneta [option...]
 
 Options:
-  -amount float
-      Set amount to convert.
-  -from string
-      Set currency to convert from. (default "USD")
-  -quiet
-      Display less output.
+  -amount Set the amount to convert
+  -from   Set the currency to convert from (default RUB)
+  -quiet  Display less output
 ```
 
 On the first run, data is fetched from the network and then cached on your disk. The cache is considered invalid the next day.
 
 ## Building
 
-The simplest way to build moneta is to use either [Task](https://taskfile.dev/):
+The simplest way to build moneta is to use either GNU Make:
 
 ```
-$ task
+make
 ```
 
-or GNU Make:
+or [Task](https://taskfile.dev/):
 
 ```
-$ make
+task
 ```
 
 Alternatively, you can build the app using the native Go tooling:
 
 ```
-$ go build -o moneta ./cmd/cli
+go build -o moneta ./cmd/cli
 ```
 
 ## License
