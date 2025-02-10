@@ -10,15 +10,20 @@ import (
 
 var (
 	amount       = flag.Float64("amount", 0.0, "Set amount to convert.")
-	currencyCode = flag.String("from", "USD", "Set currency to convert from.")
+	currencyCode = flag.String("from", "RUB", "Set currency to convert from.")
 	quiet        = flag.Bool("quiet", false, "Display less output.")
 )
 
 func init() {
 	os.MkdirAll(cache.CacheDir(), 0700)
+	usage := `Usage: moneta [option...]
+
+Options:
+  -amount	Set the amount to convert
+  -from		Set the currency to convert from (default RUB)
+  -quiet	Display less output`
 	flag.Usage = func() {
-		fmt.Fprintln(flag.CommandLine.Output(), "Usage: moneta [option...]\n\nOptions:")
-		flag.PrintDefaults()
+		fmt.Fprintln(flag.CommandLine.Output(), usage)
 	}
 	flag.Parse()
 }
