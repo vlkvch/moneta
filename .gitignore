@@ -1,4 +1,5 @@
 /.task
 /bin
 
-*.sublime-*
+*.sublime-project
+*.sublime-workspace
