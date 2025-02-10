@@ -1,17 +1,20 @@
-PROG = moneta
-SRCDIR = ./cmd/cli
-BINDIR = ./bin
+PROG := moneta
+SRCDIR := ./cmd/cli
+BINDIR := ./bin
 
 all: $(PROG)
 
 $(PROG):
-	go build -o $(BINDIR)/$(PROG) $(SRCDIR)
+	@go build -o $(BINDIR)/$(PROG) $(SRCDIR)
 
 run: $(PROG)
-	$(BINDIR)/$(PROG)
+	@$(BINDIR)/$(PROG)
 
 clean:
-	rm --force $(BINDIR)/$(PROG)
-	rmdir $(BINDIR)
+	@rm --force $(BINDIR)/$(PROG)
+	@rmdir $(BINDIR)
 
-.PHONY: all clean
+fmt:
+	@gofmt -w .
+
+.PHONY: all run clean fmt
