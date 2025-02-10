@@ -23,19 +23,19 @@ On the first run, data is fetched from the network and then cached on your disk.
 
 The simplest way to build moneta is to use either GNU Make:
 
-```
+```shell
 make
 ```
 
 or [Task](https://taskfile.dev/):
 
-```
+```shell
 task
 ```
 
 Alternatively, you can build the app using the native Go tooling:
 
-```
+```shell
 go build -o moneta ./cmd/cli
 ```
 
