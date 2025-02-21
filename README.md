@@ -12,9 +12,12 @@ You can get the usage using the `-h`/`--help` flag.
 Usage: moneta [option...]
 
 Options:
-  -amount Set the amount to convert
-  -from   Set the currency to convert from (default RUB)
-  -quiet  Display less output
+  -amount float
+      Set amount to convert.
+  -from string
+      Set currency to convert from. (default "RUB")
+  -quiet
+      Display less output.
 ```
 
 On the first run, data is fetched from the network and then cached on your disk. The cache is considered invalid the next day.
@@ -27,7 +30,7 @@ The simplest way to build moneta is to use either GNU Make:
 make
 ```
 
-or [Task](https://taskfile.dev/):
+or Task:
 
 ```shell
 task
