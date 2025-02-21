@@ -22,6 +22,12 @@ tasks:
     cmds:
       - $BINDIR/$PROG {{.CLI_ARGS}}
 
+  fmt:
+    sources:
+      - ./**/*.go
+    cmds:
+      - gofmt -w .
+
   clean:
     cmds:
       - rm --force $BINDIR/$PROG
