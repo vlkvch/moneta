@@ -1,4 +1,4 @@
-package cache
+package fetchers
 
 import (
 	"encoding/json"
@@ -10,17 +10,12 @@ import (
 	"github.com/vlkvch/moneta/internal/models"
 )
 
-func CacheDir() string {
-	cacheDir, err := os.UserCacheDir()
-	if err != nil {
-		return ""
-	}
-
-	return filepath.Join(cacheDir, "moneta")
+type Cache struct {
+	CacheDir string
 }
 
-func IsValid(code string) bool {
-	cacheDirFS := os.DirFS(CacheDir())
+func (c *Cache) Valid(code string) bool {
+	cacheDirFS := os.DirFS(c.CacheDir)
 
 	currencyFile, err := cacheDirFS.Open(strings.ToLower(code) + ".json")
 	if err != nil {
@@ -39,10 +34,10 @@ func IsValid(code string) bool {
 	return time.Now().Before(resetTime)
 }
 
-func GetCurrency(code string) (*models.Currency, error) {
-	file := currencyCachePath(code)
+func (c *Cache) GetCurrency(code string) (*models.Currency, error) {
+	cachePath := c.currencyCachePath(code)
 
-	contents, err := os.ReadFile(file)
+	contents, err := os.ReadFile(cachePath)
 	if err != nil {
 		return nil, err
 	}
@@ -56,15 +51,15 @@ func GetCurrency(code string) (*models.Currency, error) {
 	return curr, nil
 }
 
-func Write(curr *models.Currency) error {
+func (c *Cache) Write(curr *models.Currency) error {
 	data, err := json.Marshal(curr)
 	if err != nil {
 		return err
 	}
 
-	filePath := currencyCachePath(curr.Code)
+	cachePath := c.currencyCachePath(curr.Code)
 
-	currencyFile, err := os.OpenFile(filePath, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0644)
+	currencyFile, err := os.OpenFile(cachePath, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return err
 	}
@@ -77,6 +72,6 @@ func Write(curr *models.Currency) error {
 	return nil
 }
 
-func currencyCachePath(code string) string {
-	return filepath.Join(CacheDir(), strings.ToLower(code)+".json")
+func (c *Cache) currencyCachePath(code string) string {
+	return filepath.Join(c.CacheDir, strings.ToLower(code)+".json")
 }

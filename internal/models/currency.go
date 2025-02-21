@@ -1,9 +1,6 @@
 package models
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
 type Currency struct {
 	Scale int     `json:"Cur_Scale"`
@@ -12,5 +9,5 @@ type Currency struct {
 }
 
 func (c Currency) String() string {
-	return fmt.Sprintf("%s BYN", strconv.FormatFloat(c.Rate, 'f', 4, 32))
+	return fmt.Sprintf("%.4f BYN", c.Rate)
 }

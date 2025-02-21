@@ -1,4 +1,4 @@
-package nbrb
+package fetchers
 
 import (
 	"encoding/json"
@@ -9,20 +9,22 @@ import (
 	"github.com/vlkvch/moneta/internal/models"
 )
 
-const apiURL = "https://api.nbrb.by/exrates/rates"
+type NBRB struct {
+	ApiURL string
+}
 
-func GetCurrency(code string) (*models.Currency, error) {
-	res, err := http.Get(fmt.Sprintf("%s/%s?parammode=2", apiURL, code))
+func (nbrb *NBRB) GetCurrency(code string) (*models.Currency, error) {
+	resp, err := http.Get(fmt.Sprintf("%s/%s?parammode=2", nbrb.ApiURL, code))
 	if err != nil {
 		return nil, err
 	}
-	defer res.Body.Close()
+	defer resp.Body.Close()
 
-	if res.StatusCode == http.StatusNotFound {
+	if resp.StatusCode == http.StatusNotFound {
 		return nil, models.ErrNoSuchCurrency
 	}
 
-	data, err := io.ReadAll(res.Body)
+	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}

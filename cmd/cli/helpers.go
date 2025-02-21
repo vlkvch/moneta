@@ -4,29 +4,27 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
-
-	"github.com/vlkvch/moneta/internal/fetcher"
 )
 
-func mainCurrencies() (string, error) {
-	currencies := [...]string{"CNY", "EUR", "KZT", "RUB", "USD"}
+func (app *application) mainCurrencies() (string, error) {
+	currencyCodes := [...]string{"CNY", "EUR", "KZT", "RUB", "USD"}
 
 	sb := new(strings.Builder)
 
-	for _, curr := range currencies {
-		c, err := fetcher.GetCurrency(curr)
+	for _, code := range currencyCodes {
+		curr, err := app.fetcher.GetCurrency(code)
 		if err != nil {
 			return "", err
 		}
 
-		fmt.Fprintf(sb, "%-4d %s = %s\n", c.Scale, c.Code, c)
+		fmt.Fprintf(sb, "%-4d %s = %s\n", curr.Scale, curr.Code, curr)
 	}
 
 	return strings.Trim(sb.String(), "\n"), nil
 }
 
-func singleCurrency(code string, amount float64, quiet bool) (string, error) {
-	curr, err := fetcher.GetCurrency(code)
+func (app *application) singleCurrency(code string, amount float64, quiet bool) (string, error) {
+	curr, err := app.fetcher.GetCurrency(code)
 	if err != nil {
 		return "", err
 	}
@@ -35,11 +33,13 @@ func singleCurrency(code string, amount float64, quiet bool) (string, error) {
 		amount = float64(curr.Scale)
 	}
 
-	startStr := fmt.Sprintf("%s %s = ", strconv.FormatFloat(amount, 'f', -1, 32), curr.Code)
+	var startString string
 
 	if quiet {
-		startStr = ""
+		startString = ""
+	} else {
+		startString = fmt.Sprintf("%s %s = ", strconv.FormatFloat(amount, 'f', -1, 32), curr.Code)
 	}
 
-	return fmt.Sprintf("%s%s BYN", startStr, strconv.FormatFloat(curr.Rate*amount/float64(curr.Scale), 'f', -1, 32)), nil
+	return fmt.Sprintf("%s%s BYN", startString, strconv.FormatFloat(curr.Rate*amount/float64(curr.Scale), 'f', -1, 32)), nil
 }

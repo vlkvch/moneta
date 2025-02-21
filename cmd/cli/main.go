@@ -4,8 +4,10 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 
-	"github.com/vlkvch/moneta/internal/cache"
+	"github.com/vlkvch/moneta/internal/fetchers"
+	"github.com/vlkvch/moneta/internal/models"
 )
 
 var (
@@ -14,40 +16,61 @@ var (
 	quiet        = flag.Bool("quiet", false, "Display less output.")
 )
 
-func init() {
-	os.MkdirAll(cache.CacheDir(), 0700)
-	usage := `Usage: moneta [option...]
+const apiURL = "https://api.nbrb.by/exrates/rates"
 
-Options:
-  -amount	Set the amount to convert
-  -from		Set the currency to convert from (default RUB)
-  -quiet	Display less output`
+func init() {
 	flag.Usage = func() {
-		fmt.Fprintln(flag.CommandLine.Output(), usage)
+		fmt.Fprintln(flag.CommandLine.Output(), "Usage: moneta [option...]\n\nOptions:")
+		flag.PrintDefaults()
 	}
 	flag.Parse()
 }
 
 func main() {
+	cacheDir, err := cacheDir()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "moneta: error: %v\n", models.ErrCacheDirNotFound)
+		os.Exit(1)
+	}
+	os.MkdirAll(cacheDir, 0700)
+
+	fetcher := &fetchers.Fetcher{
+		NBRB:  &fetchers.NBRB{ApiURL: apiURL},
+		Cache: &fetchers.Cache{CacheDir: cacheDir},
+	}
+
+	app := &application{
+		fetcher: fetcher,
+	}
+
 	var output string
 
 	if len(os.Args[1:]) == 0 {
-		mainCurrencies, err := mainCurrencies()
+		main, err := app.mainCurrencies()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "moneta: error: %v\n", err)
 			os.Exit(1)
 		}
 
-		output = mainCurrencies
+		output = main
 	} else {
-		currency, err := singleCurrency(*currencyCode, *amount, *quiet)
+		single, err := app.singleCurrency(*currencyCode, *amount, *quiet)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "moneta: error: %v\n", err)
 			os.Exit(1)
 		}
 
-		output = currency
+		output = single
 	}
 
 	fmt.Println(output)
+}
+
+func cacheDir() (string, error) {
+	cacheDir, err := os.UserCacheDir()
+	if err != nil {
+		return "", err
+	}
+
+	return filepath.Join(cacheDir, "moneta"), nil
 }
