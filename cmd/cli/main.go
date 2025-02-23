@@ -20,7 +20,7 @@ const apiURL = "https://api.nbrb.by/exrates/rates"
 
 func init() {
 	flag.Usage = func() {
-		fmt.Fprintln(flag.CommandLine.Output(), "Usage: moneta [option...]\n\nOptions:")
+		fmt.Fprintf(flag.CommandLine.Output(), "Usage: %s [option...]\n\nOptions:\n", os.Args[0])
 		flag.PrintDefaults()
 	}
 	flag.Parse()
