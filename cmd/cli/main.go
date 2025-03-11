@@ -35,7 +35,7 @@ func main() {
 	os.MkdirAll(cacheDir, 0700)
 
 	fetcher := &fetchers.Fetcher{
-		NBRB:  &fetchers.NBRB{ApiURL: apiURL},
+		NBRB:  &fetchers.NBRB{APIURL: apiURL},
 		Cache: &fetchers.Cache{CacheDir: cacheDir},
 	}
 

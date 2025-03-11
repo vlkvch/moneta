@@ -10,11 +10,11 @@ import (
 )
 
 type NBRB struct {
-	ApiURL string
+	APIURL string
 }
 
 func (nbrb *NBRB) GetCurrency(code string) (*models.Currency, error) {
-	resp, err := http.Get(fmt.Sprintf("%s/%s?parammode=2", nbrb.ApiURL, code))
+	resp, err := http.Get(fmt.Sprintf("%s/%s?parammode=2", nbrb.APIURL, code))
 	if err != nil {
 		return nil, err
 	}
