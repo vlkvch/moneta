@@ -22,7 +22,10 @@ func (f *Fetcher) GetCurrency(code string) (*models.Currency, error) {
 		return nil, err
 	}
 
-	f.Cache.Write(curr)
+	err = f.Cache.Write(curr)
+	if err != nil {
+		return nil, err
+	}
 
 	return curr, nil
 }
