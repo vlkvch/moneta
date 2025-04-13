@@ -17,7 +17,7 @@ type Cache struct {
 func (c *Cache) Valid(code string) bool {
 	cacheDirFS := os.DirFS(c.CacheDir)
 
-	currencyFile, err := cacheDirFS.Open(strings.ToLower(code) + ".json")
+	currencyFile, err := cacheDirFS.Open(strings.ToUpper(code) + ".json")
 	if err != nil {
 		return false
 	}
@@ -73,5 +73,5 @@ func (c *Cache) Write(curr *models.Currency) error {
 }
 
 func (c *Cache) currencyCachePath(code string) string {
-	return filepath.Join(c.CacheDir, strings.ToLower(code)+".json")
+	return filepath.Join(c.CacheDir, strings.ToUpper(code)+".json")
 }
