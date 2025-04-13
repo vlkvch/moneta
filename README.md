@@ -24,22 +24,16 @@ On the first run, data is fetched from the network and then cached on your disk.
 
 ## Building
 
-The simplest way to build moneta is to use either GNU Make:
+The easiest way to build moneta is to use GNU Make:
 
 ```shell
 make
 ```
 
-or Task:
+Alternatively, if you’re using Windows, you can use the `build` script living in the `scripts` directory.
 
 ```shell
-task
-```
-
-Alternatively, you can build the app using the native Go tooling:
-
-```shell
-go build -o moneta ./cmd/cli
+.\scripts\build.bat
 ```
 
 ## License
