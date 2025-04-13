@@ -24,16 +24,15 @@ On the first run, data is fetched from the network and then cached on your disk.
 
 ## Building
 
-The easiest way to build moneta is to use GNU Make:
+To build moneta, you can use a build script in the `scripts` directory depending on your platform:
+
+- `build.sh` for Unix;
+- `build.bat` for Windows.
+
+Alternatively, you can use Make:
 
 ```shell
 make
-```
-
-Alternatively, if you’re using Windows, you can use the `build` script living in the `scripts` directory.
-
-```shell
-.\scripts\build.bat
 ```
 
 ## License
