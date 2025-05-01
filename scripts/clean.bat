@@ -1,3 +1,5 @@
 @echo off
+cd /d "%~dp0.."
 
-rmdir /s /q ".\bin"
+del ".\bin\moneta.exe"
+rmdir ".\bin"
