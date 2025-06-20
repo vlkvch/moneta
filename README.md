@@ -1,5 +1,7 @@
 # moneta
 
+**English** | [Русский](README.ru.md)
+
 moneta is a CLI utility for converting foreign currencies to BYN.
 
 Currency rates are fetched from the National Bank of the Republic of Belarus.
