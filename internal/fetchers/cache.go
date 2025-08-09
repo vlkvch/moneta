@@ -29,7 +29,13 @@ func (c *Cache) Valid(code string) bool {
 	}
 
 	lastUpdated := fileStat.ModTime()
-	resetTime := time.Date(lastUpdated.Year(), lastUpdated.Month(), lastUpdated.Day()+1, 0, 0, 0, 0, time.Local)
+
+	loc, err := time.LoadLocation("Europe/Minsk")
+	if err != nil {
+		return false
+	}
+
+	resetTime := time.Date(lastUpdated.Year(), lastUpdated.Month(), lastUpdated.Day()+1, 0, 0, 0, 0, loc)
 
 	return time.Now().Before(resetTime)
 }
