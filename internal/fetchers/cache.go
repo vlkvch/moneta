@@ -32,7 +32,7 @@ func (c *Cache) Valid(code string) bool {
 
 	loc, err := time.LoadLocation("Europe/Minsk")
 	if err != nil {
-		return false
+		loc = time.Local
 	}
 
 	resetTime := time.Date(lastUpdated.Year(), lastUpdated.Month(), lastUpdated.Day()+1, 0, 0, 0, 0, loc)
