@@ -17,7 +17,7 @@ func (app *application) mainCurrencies() (string, error) {
 			return "", err
 		}
 
-		fmt.Fprintf(sb, "%-4d %s = %s\n", curr.Scale, curr.Code, curr)
+		fmt.Fprintf(sb, "%4d %s = %s\n", curr.Scale, curr.Code, curr)
 	}
 
 	return strings.Trim(sb.String(), "\n"), nil
