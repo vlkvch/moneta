@@ -35,9 +35,7 @@ func (app *application) singleCurrency(code string, amount float64, quiet bool) 
 
 	var startString string
 
-	if quiet {
-		startString = ""
-	} else {
+	if !quiet {
 		startString = fmt.Sprintf("%s %s = ", strconv.FormatFloat(amount, 'f', -1, 32), curr.Code)
 	}
 
