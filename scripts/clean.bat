@@ -1,5 +1,5 @@
 @echo off
 cd /d "%~dp0.."
 
-del ".\bin\moneta.exe"
-rmdir ".\bin"
+del ".\build\moneta.exe"
+rmdir ".\build"
