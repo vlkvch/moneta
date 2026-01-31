@@ -32,7 +32,7 @@ func (c *Cache) Valid(code string) bool {
 
 	loc, err := time.LoadLocation("Europe/Minsk")
 	if err != nil {
-		loc = time.Local
+		loc = time.FixedZone("UTC+3", 3*60*60)
 	}
 
 	resetTime := time.Date(lastUpdated.Year(), lastUpdated.Month(), lastUpdated.Day()+1, 0, 0, 0, 0, loc)
