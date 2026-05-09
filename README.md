@@ -1,14 +1,14 @@
 # moneta
 
-**English** | [Русский](README.ru.md)
+**Русский** | [English](README.en.md)
 
-moneta is a CLI utility for converting foreign currencies to BYN.
+Монета — это утилита командной строки для конвертации иностранных валют в белорусские рубли.
 
-Currency rates are fetched from the National Bank of the Republic of Belarus.
+Программа использует курсы Национального банка Республики Беларусь.
 
-## Usage
+## Использование
 
-You can get the usage using the `-h`/`--help` flag.
+Справку по использованию можно получить при помощи опции `-h`/`--help`.
 
 ```
 Usage: moneta [option...]
@@ -22,21 +22,21 @@ Options:
       Display less output.
 ```
 
-On the first run, data is fetched from the network and then cached on your disk. The cache is considered invalid the next day.
+При первом запуске данные загружаются из сети и потом сохраняются в кэше на диске.
 
-## Building
+## Компиляция
 
-To build moneta, you can use a build script in the `scripts` directory depending on your platform:
+Чтобы скомпилировать Монету, можно использовать скрипты из директории `scripts`:
 
-- `build.sh` for Unix;
-- `build.bat` for Windows.
+- `build.sh` на Unix-подобных системах;
+- `build.bat` на Windows.
 
-Alternatively, you can use Make:
+Также можно воспользоваться Make:
 
 ```shell
 make
 ```
 
-## License
+## Лицензия
 
 MIT
