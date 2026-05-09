@@ -33,10 +33,10 @@ func (app *application) singleCurrency(code string, amount float64, quiet bool) 
 		amount = float64(curr.Scale)
 	}
 
-	var startString string
+	startString := fmt.Sprintf("%s %s = ", strconv.FormatFloat(amount, 'f', -1, 32), curr.Code)
 
-	if !quiet {
-		startString = fmt.Sprintf("%s %s = ", strconv.FormatFloat(amount, 'f', -1, 32), curr.Code)
+	if quiet {
+		startString = ""
 	}
 
 	return fmt.Sprintf("%s%s BYN", startString, strconv.FormatFloat(curr.Rate*amount/float64(curr.Scale), 'f', -1, 32)), nil
